@@ -1,2 +1,2 @@
-# EntryPlus
-Entry+
+# Entry+
+여러 기능 추가가 목표
