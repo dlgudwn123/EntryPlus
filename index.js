@@ -43,12 +43,14 @@ function changeContent(){
     as.forEach(async v => {
         if (v.innerHTML.startsWith('https://playentry.org/project/')) {
             let a = v.innerHTML.slice(30);
+            const csrf = document.querySelector("meta[name=csrf-token]").content;
+            const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.initialState.common.user.xToken;
             let fet = await fetch("https://playentry.org/graphql", {
                 "headers": {
                   "accept": "*/*",
                   "accept-language": "ko-KR,ko;q=0.9,en;q=0.8",
                   "content-type": "application/json",
-                  "csrf-token": "EXPgSE5B-cLcY9Ud-5L5uPEufHONm0HCcLt8",
+                  "csrf-token": csrf,
                   "sec-ch-ua": "\"Chromium\";v=\"112\", \"Google Chrome\";v=\"112\", \"Not:A-Brand\";v=\"99\"",
                   "sec-ch-ua-mobile": "?0",
                   "sec-ch-ua-platform": "\"Windows\"",
@@ -56,8 +58,7 @@ function changeContent(){
                   "sec-fetch-mode": "cors",
                   "sec-fetch-site": "same-origin",
                   "x-client-type": "Client",
-                  "x-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZG5vIjoiODVmZGIyMzAtYzdjOS0xMWU4LTgyN2ItMjQ2ZTk2NDg3ZTM4IiwiZXhwIjoxNjg0NzM4NzE5LCJpYXQiOjE2ODM1MjkxMTl9.uHk6CLmIv23RERov7d6Z8cVzFAF71xoTTIuO5Fntzk0",
-                  "cookie": "_ga=GA1.2.64320090.1657621987; _gid=GA1.2.1677077548.1683357600; ETR_SID=ObYzV8QXvDI1Se2c50ANjWMXR0YkFCTyT5qgoa8vERbtbZjzEAH31unwKvBNpWSuXARb4iFnu83bO8X89kmKPK+BOkGT1J8gF9XMarI7+KzxGkRaaEHQkdPCOcl30EMNULqSKIPZJBrNgDRdF1ySxPT/yV1gdjqT8CoX3LuoA+KgoOdND1CASya7sAORVon3ATF8UTKu2Ck7YIx8rZDsP3meCMC8anhafEyfasXL+bG68fdO7eEjk41aOJBTMbEYSn7k3GMpBXTDhJPwFePNcWVWEOE1Z7Rf6jqlfmA6uElh4NFjzEEaahHL7JySm6YD08XlN/1mmWr15JwPryUcjWgKwypyIJ05sICV4SzG+so/zP96Gb4P0kpjIDMQMMln; username=dlgudwn123; _csrf=sOaTBF0-rwg8cMM-w2bhYjTz; _ecui=gjv4vxfelhef828a0018f7231aaovgdw; ETR_CHK=\"r5V0mf9uRUZHZ/vmLGy3e4hSd1AqJ+macYdIOg9W8eOsRzah0dljuTw+Wu9SeW7/oZ1GdVWKgyvt3Q6wsI8JG+B6s3m5DaY+4cPomqm9oUI98ZR60vAXkqcB1/Cdp7cWcjnyqOhMjVQ2t1LzM5GYwA==\"; _gat=1; _gat_UA-48464763-1=1",
+                  "x-token": xToken,
                   "Referer": v.innerHTML,
                   "Referrer-Policy": "strict-origin-when-cross-origin"
                 },
@@ -98,38 +99,39 @@ function changeContent(){
         //수정된 내용 적용
         element.innerHTML = text;
     });
-    //​location.pathname === "/community/entrystory/list" && 
-    if (!document.querySelector('.ep_fake') && document.querySelector('a.css-1adjw8a.e13821ld2')) {
-        let write = document.querySelector('a.css-1adjw8a.e13821ld2');
-        const but = document.createElement("a");
-        but.className = "ep_fake";
-        but.innerText = "등록";
-        but.role = "button";
-        but.addEventListener("click", () => {
-            const area = document.querySelector("#Write");
-            area.value = area.innerHTML.replaceAll('*', '​').replaceAll('__', '​​​').replaceAll('~~', '​​​​');
-            const xToken = JSON.parse(
-                document.getElementById("__NEXT_DATA__").innerText
-              ).props.initialState.common.user.xToken;
-            const csrf = document.querySelector("meta[name=csrf-token]").content;
-            chrome.runtime.sendMessage({
-                contentScriptQuery: "post",
-                data: {
-                csrf,
-                xToken,
-                cookie: document.cookie,
-                data: area.value,
-                },
-            },
-                () => {
-                    write.click();
-                    location.reload();
-                }
-            );
-        });
-        write.style = 'display: none';
-        write.parentElement.appendChild(but);
-    }
+    // location.pathname === "/community/entrystory/list" && 
+    // 마크다운 변환
+    // if (!document.querySelector('.ep_fake') && document.querySelector('a.css-1adjw8a.e13821ld2') && document.querySelector("meta[name=csrf-token]")) {
+    //     let write = document.querySelector('a.css-1adjw8a.e13821ld2');
+    //     const but = document.createElement("a");
+    //     but.className = "ep_fake";
+    //     but.innerText = "등록";
+    //     but.role = "button";
+    //     but.addEventListener("click", () => {
+    //         const area = document.querySelector("#Write");
+    //         let res = area.innerHTML.replaceAll('*', '​').replaceAll('__', '​​​').replaceAll('~~', '​​​​');
+    //         area.value = res;
+    //         area.innerHTML = res;
+    //         const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.initialState.common.user.xToken;
+    //         const csrf = document.querySelector("meta[name=csrf-token]").content;
+    //         chrome.runtime.sendMessage({
+    //             contentScriptQuery: "post",
+    //             data: {
+    //             csrf,
+    //             xToken,
+    //             cookie: document.cookie,
+    //             data: res,
+    //             },
+    //         },
+    //             () => {
+    //                 // write.click();
+    //                 location.reload();
+    //             }
+    //         );
+    //     });
+    //     write.style = 'display: none';
+    //     write.parentElement.appendChild(but);
+    // }
 }
 //html이 수정될때 changeContent호출
 const targetNode = document.querySelector("body");

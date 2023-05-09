@@ -6,7 +6,7 @@
     "128": "icon.png"
   },
   "permissions": [
-    "activeTab"
+    "activeTab", "webNavigation", "scripting", "tabs"
   ],
   "content_scripts" : [
       {
@@ -14,5 +14,6 @@
           "js" : ["index.js"],
           "css": ["index.css"]
       }
-  ]
+  ],
+  "host_permissions": ["https://playentry.org/*"]
 }

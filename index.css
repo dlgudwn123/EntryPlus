@@ -16,7 +16,7 @@
     background-color: #0000005c;
 }
 .ep_image {
-    width: calc(100%-10px);
+    width: 313px;
     height: auto;
     padding: 5px;
     background-color: rgb(10, 133, 255);
@@ -27,7 +27,7 @@
     background-color: rgb(10, 133, 255);
     background: linear-gradient(270deg, rgba(6,92,179,1) 0%, rgba(10,133,255,1) 100%);
     padding: 5px;
-    width: 300px;
+    width: 250px;
     height: 176px;
     color: white;
     /* border-top-right-radius: 4px;
