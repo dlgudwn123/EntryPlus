@@ -101,37 +101,37 @@ function changeContent(){
     });
     // location.pathname === "/community/entrystory/list" && 
     // 마크다운 변환
-    // if (!document.querySelector('.ep_fake') && document.querySelector('a.css-1adjw8a.e13821ld2') && document.querySelector("meta[name=csrf-token]")) {
-    //     let write = document.querySelector('a.css-1adjw8a.e13821ld2');
-    //     const but = document.createElement("a");
-    //     but.className = "ep_fake";
-    //     but.innerText = "등록";
-    //     but.role = "button";
-    //     but.addEventListener("click", () => {
-    //         const area = document.querySelector("#Write");
-    //         let res = area.innerHTML.replaceAll('*', '​').replaceAll('__', '​​​').replaceAll('~~', '​​​​');
-    //         area.value = res;
-    //         area.innerHTML = res;
-    //         const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.initialState.common.user.xToken;
-    //         const csrf = document.querySelector("meta[name=csrf-token]").content;
-    //         chrome.runtime.sendMessage({
-    //             contentScriptQuery: "post",
-    //             data: {
-    //             csrf,
-    //             xToken,
-    //             cookie: document.cookie,
-    //             data: res,
-    //             },
-    //         },
-    //             () => {
-    //                 // write.click();
-    //                 location.reload();
-    //             }
-    //         );
-    //     });
-    //     write.style = 'display: none';
-    //     write.parentElement.appendChild(but);
-    // }
+    if (!document.querySelector('.ep_fake') && document.querySelector('a.css-1adjw8a.e13821ld2') && document.querySelector("meta[name=csrf-token]")) {
+        let write = document.querySelector('a.css-1adjw8a.e13821ld2');
+        const but = document.createElement("a");
+        but.className = "ep_fake";
+        but.innerText = "등록";
+        but.role = "button";
+        but.addEventListener("click", () => {
+            const area = document.querySelector("#Write");
+            let res = area.innerHTML.replaceAll('*', '​').replaceAll('__', '​​​').replaceAll('~~', '​​​​');
+            area.value = res;
+            area.innerHTML = res;
+            const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.initialState.common.user.xToken;
+            const csrf = document.querySelector("meta[name=csrf-token]").content;
+            chrome.runtime.sendMessage({
+                contentScriptQuery: "post",
+                data: {
+                csrf,
+                xToken,
+                cookie: document.cookie,
+                data: res,
+                },
+            },
+                () => {
+                    // write.click();
+                    location.reload();
+                }
+            );
+        });
+        write.style = 'display: none';
+        write.parentElement.appendChild(but);
+    }
 }
 //html이 수정될때 changeContent호출
 const targetNode = document.querySelector("body");
