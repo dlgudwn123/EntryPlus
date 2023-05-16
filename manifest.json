@@ -5,9 +5,6 @@
   "icons": {
     "128": "icon.png"
   },
-  "permissions": [
-    "activeTab", "webNavigation", "scripting", "tabs"
-  ],
   "content_scripts" : [
       {
           "matches" : ["https://playentry.org/*"],
@@ -15,8 +12,5 @@
           "css": ["index.css"]
       }
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
   "host_permissions": ["https://playentry.org/*"]
 }

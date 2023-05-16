@@ -3,33 +3,41 @@
     flex-direction: row;
     margin-bottom: 10px;
     margin-top: 10px;
-    border-radius: 8px;
-    border: 3px solid black;
+    border-radius: 25px;
+    border: 5px solid rgb(22, 216, 163);
+    background-color: rgb(231, 251, 246);
     overflow: hidden;
     width: min-content;
+    transition: 200ms ease-out;
+}
+.ep_back:hover {
+    border-color: rgb(0, 159, 249);
+    background-color: rgb(230, 251, 255);
 }
 .ep_likes {
     position: absolute;
-    transform: translate(15px, 144px);
-    font-size: 20px; color: white; padding:
-    3px; padding-right: 6px; border-radius: 5px;
+    transform: translate(20px, 144px);
+    font-size: 20px; color: white;
+    padding: 3px;
+    padding-right: 6px;
+    border-radius: 5px;
     background-color: #0000005c;
 }
 .ep_image {
-    width: 313px;
+    width: 303px;
     height: auto;
     padding: 5px;
-    background-color: rgb(10, 133, 255);
+    margin: 5px;
+    border-radius: 20px;
     /* border-top-left-radius: 4px;
     border-bottom-left-radius: 4px; */
 }
 .ep_info {
-    background-color: rgb(10, 133, 255);
-    background: linear-gradient(270deg, rgba(6,92,179,1) 0%, rgba(10,133,255,1) 100%);
+    /* background: linear-gradient(270deg, rgba(6,92,179,1) 0%, rgba(10,133,255,1) 100%); */
     padding: 5px;
     width: 250px;
     height: 176px;
-    color: white;
+    color: black;
     /* border-top-right-radius: 4px;
     border-bottom-right-radius: 4px; */
     padding-right: 10px

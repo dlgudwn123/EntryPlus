@@ -68,70 +68,70 @@ function changeContent(){
             res = await fet.json();
             if (res.data) {
                 v.parentElement.style = 'display: flex; flex-direction: column;';
-                v.innerHTML = `<div class="ep_back"><div class="ep_likes">❤️${res.data.project.likeCnt} 💬${res.data.project.comment} 👁️${res.data.project.visit}</div><img src="${res.data.project.thumb}" class="ep_image"><div class="ep_info"><div class="ep_info_b"><div class="ep_info_name">${res.data.project.name}</div><div class="ep_info_des">${res.data.project.description? res.data.project.description:''}<br>${res.data.project.description2? res.data.project.description2:''}<br>${res.data.project.description3? res.data.project.description3:''}</div></div></div></div>`;
+                v.innerHTML = `<div class="ep_back"><div class="ep_likes">❤️${res.data.project.likeCnt} 💬${res.data.project.comment} 👁️${res.data.project.visit}</div><img src="${res.data.project.thumb}" class="ep_image"><div class="ep_info"><div class="ep_info_b"><div class="ep_info_name">${res.data.project.name}</div><div class="ep_info_des">${res.data.project.description? res.data.project.description.replaceAll('\n', '<br>'):''}<br>${res.data.project.description2? res.data.project.description2.replaceAll('\n', '<br>'):''}<br>${res.data.project.description3? res.data.project.description3.replaceAll('\n', '<br>'):''}</div></div></div></div>`;
             }
         }
     });
 
-    let elements = Array.from(document.querySelectorAll(".css-sy8ihv")); //글 불러오기
+    // let elements = Array.from(document.querySelectorAll(".css-sy8ihv")); //글 불러오기
 
-    elements = elements.filter(element => //이미 수정했거나 조건 안맞는 글 필터링
-        element.getAttribute("data-cheese-change") != "1" &&
-        element.children.length === 0 &&
-        element.textContent
-    ).forEach(element => { //글 내용 수정
-        element.setAttribute("data-cheese-change","1"); //수정한 경우 다시 수정하지 않게 표시
+    // elements = elements.filter(element => //이미 수정했거나 조건 안맞는 글 필터링
+    //     element.getAttribute("data-cheese-change") != "1" &&
+    //     element.children.length === 0 &&
+    //     element.textContent
+    // ).forEach(element => { //글 내용 수정
+    //     element.setAttribute("data-cheese-change","1"); //수정한 경우 다시 수정하지 않게 표시
 
-        text = element.textContent; //글 내용 가져오기
+    //     text = element.textContent; //글 내용 가져오기
 
-        //XSS공격 방지
-        text = text.replace(/</g, '&lt;');
-        text = text.replace(/>/g, '&gt;');
-        text = text.replace(/&/g, '&amp;');
-        text = text.replace(/\//g, '&#x2F;');
+    //     //XSS공격 방지
+    //     text = text.replace(/</g, '&lt;');
+    //     text = text.replace(/>/g, '&gt;');
+    //     text = text.replace(/&/g, '&amp;');
+    //     text = text.replace(/\//g, '&#x2F;');
 
-        //글 내용 수정
-        text = text.replace(/\​\​\​\​(\S.*?\S)\​\​\​\​/g,'<del>$1</del>');
-        text = text.replace(/\​\​\​(\S.*?\S)\​\​\​/g, '<ins>$1</ins>');
-        text = text.replace(/\​\​(\S.*?\S)\​\​/g, '<strong>$1</strong>');
-        text = text.replace(/\​(\S.*?\S)\​/g,'<em style="font-style: italic">$1</em>');
+    //     //글 내용 수정
+    //     text = text.replace(/\​\​\​\​(\S.*?\S)\​\​\​\​/g,'<del>$1</del>');
+    //     text = text.replace(/\​\​\​(\S.*?\S)\​\​\​/g, '<ins>$1</ins>');
+    //     text = text.replace(/\​\​(\S.*?\S)\​\​/g, '<strong>$1</strong>');
+    //     text = text.replace(/\​(\S.*?\S)\​/g,'<em style="font-style: italic">$1</em>');
 
-        //수정된 내용 적용
-        element.innerHTML = text;
-    });
+    //     //수정된 내용 적용
+    //     element.innerHTML = text;
+    // });
     // location.pathname === "/community/entrystory/list" && 
     // 마크다운 변환
-    if (!document.querySelector('.ep_fake') && document.querySelector('a.css-1adjw8a.e13821ld2') && document.querySelector("meta[name=csrf-token]")) {
-        let write = document.querySelector('a.css-1adjw8a.e13821ld2');
-        const but = document.createElement("a");
-        but.className = "ep_fake";
-        but.innerText = "등록";
-        but.role = "button";
-        but.addEventListener("click", () => {
-            const area = document.querySelector("#Write");
-            let res = area.innerHTML.replaceAll('*', '​').replaceAll('__', '​​​').replaceAll('~~', '​​​​');
-            area.value = res;
-            area.innerHTML = res;
-            const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.initialState.common.user.xToken;
-            const csrf = document.querySelector("meta[name=csrf-token]").content;
-            chrome.runtime.sendMessage({
-                contentScriptQuery: "post",
-                data: {
-                csrf,
-                xToken,
-                cookie: document.cookie,
-                data: res,
-                },
-            },
-                () => {
-                    // write.click();
-                    location.reload();
-                }
-            );
-        });
-        write.style = 'display: none';
-        write.parentElement.appendChild(but);
-    }
+    // if (!document.querySelector('.ep_fake') && document.querySelector('a.css-1adjw8a.e13821ld2') && document.querySelector("meta[name=csrf-token]")) {
+    //     let write = document.querySelector('a.css-1adjw8a.e13821ld2');
+    //     const but = document.createElement("a");
+    //     but.className = "ep_fake";
+    //     but.innerText = "등록";
+    //     but.role = "button";
+    //     but.addEventListener("click", () => {
+    //         const area = document.querySelector("#Write");
+    //         let res = area.innerHTML.replaceAll('*', '​').replaceAll('__', '​​​').replaceAll('~~', '​​​​');
+    //         area.value = res;
+    //         area.innerHTML = res;
+    //         const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.initialState.common.user.xToken;
+    //         const csrf = document.querySelector("meta[name=csrf-token]").content;
+    //         chrome.runtime.sendMessage({
+    //             contentScriptQuery: "post",
+    //             data: {
+    //             csrf,
+    //             xToken,
+    //             cookie: document.cookie,
+    //             data: res,
+    //             },
+    //         },
+    //             () => {
+    //                 // write.click();
+    //                 location.reload();
+    //             }
+    //         );
+    //     });
+    //     write.style = 'display: none';
+    //     write.parentElement.appendChild(but);
+    // }
 }
 //html이 수정될때 changeContent호출
 const targetNode = document.querySelector("body");
