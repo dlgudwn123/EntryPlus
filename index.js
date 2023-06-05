@@ -68,7 +68,7 @@ function changeContent(){
             res = await fet.json();
             if (res.data) {
                 v.parentElement.style = 'display: flex; flex-direction: column;';
-                v.innerHTML = `<div class="ep_back"><div class="ep_likes">❤️${res.data.project.likeCnt} 💬${res.data.project.comment} 👁️${res.data.project.visit}</div><img src="${res.data.project.thumb}" class="ep_image"><div class="ep_info"><div class="ep_info_b"><div class="ep_info_name">${res.data.project.name}</div><div class="ep_info_des">${res.data.project.description? res.data.project.description.replaceAll('\n', '<br>'):''}<br>${res.data.project.description2? res.data.project.description2.replaceAll('\n', '<br>'):''}<br>${res.data.project.description3? res.data.project.description3.replaceAll('\n', '<br>'):''}</div></div></div></div>`;
+                v.innerHTML = `<div class="ep_back"><div class="ep_likes">❤️${res.data.project.likeCnt} 💬${res.data.project.comment} 👁️${res.data.project.visit}</div><img src="${res.data.project.thumb}" class="ep_image"><div class="ep_info"><div class="ep_info_b"><div class="ep_info_name">${res.data.project.name}</div><div class="ep_info_des">${res.data.project.description? res.data.project.description.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('\n', '<br>'):''}<br>${res.data.project.description2? res.data.project.description2.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('\n', '<br>'):''}<br>${res.data.project.description3? res.data.project.description3.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('\n', '<br>'):''}</div></div></div></div>`;
             }
         }
     });
