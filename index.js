@@ -38,7 +38,9 @@
 // };
 // run(['']);
 
-function changeContent(){
+let md123;
+
+async function changeContent(){
     let as = document.querySelectorAll('a');
     as.forEach(async v => {
         if (v.innerHTML.startsWith('https://playentry.org/project/')) {
@@ -72,6 +74,30 @@ function changeContent(){
             }
         }
     });
+    
+    // setInterval(() => {
+    //     if (EntryTool) console.log(EntryTool);
+    //     else console.log('none');
+    // }, 1000);
+
+    // if (document.defaultView) {
+    //     console.log(document.defaultView);
+    // }
+    // else {
+    //     console.log('없음');
+    // }
+
+    // if (!md123) {
+    //     await import("https://cdnjs.cloudflare.com/ajax/libs/remarkable/2.0.0/remarkable.min.js");
+    //     md = new window.remarkable.Remarkable();
+    //     console.log(md);
+    // }
+    // let gls = document.querySelectorAll('.e1i41bku1:not(.asdfasdf)');
+    // gls.forEach(v => {
+    //     v.innerHTML = md.render(v.innerText);
+    //     v.classList.add('asdfasdf');
+    //     v.style.height = 'auto';
+    // });
 
     // let elements = Array.from(document.querySelectorAll(".css-sy8ihv")); //글 불러오기
 

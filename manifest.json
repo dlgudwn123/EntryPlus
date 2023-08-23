@@ -1,6 +1,6 @@
 {
   "name" : "DL Entry+",
-  "version" : "0.7",
+  "version" : "0.8.2",
   "manifest_version" : 3,
   "icons": {
     "128": "icon.png"
@@ -10,6 +10,11 @@
           "matches" : ["https://playentry.org/*"],
           "js" : ["index.js"],
           "css": ["index.css"]
+      },
+      {
+        "world": "MAIN",
+        "js": ["page.js"],
+        "matches": ["https://playentry.org/*"]
       }
   ],
   "host_permissions": ["https://playentry.org/*"]
