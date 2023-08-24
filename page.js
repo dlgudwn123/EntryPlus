@@ -1,4 +1,4 @@
-console.log('asdf');
+console.log('Start EntryPlus+');
 let ind = 0;
 let ind2 = 0;
 let isDraw = false;
@@ -175,17 +175,22 @@ const waitAll = () => {
         Entry123 = document.defaultView[0].Entry;
         if (Entry123.variableContainer) {
             const waiting0 = () => {
+                if (Entry123.variableContainer.getVariableByName('+Version')) {
+                    Entry123.variableContainer.getVariableByName('+Version').value_ = '0.8.6';
+                }
                 if (Entry123.variableContainer.getVariableByName('isEntry+')) {
                     if (Entry123.variableContainer.getVariableByName('isEntry+').value_ !== 1) {
                         Entry123.variableContainer.getVariableByName('isEntry+').value_ = 1;
                     }
+                    setTimeout(waiting0, 1000);
+                    return;
                 }
                 else {
                     setTimeout(waiting0, 1000);
                     return;
                 }
             }
-            setTimeout(waiting0, 0);
+            setTimeout(waiting0, 1);
             if (Entry123.variableContainer.getListByName('+삼각형')) {
                 const waiting = () => {
                     const wrap = document.querySelector('iframe').contentWindow.document.body.querySelector('#entryCanvasWrapper');
@@ -299,6 +304,10 @@ const waitAll = () => {
             }
             if (Entry123.variableContainer.getVariableByName('+Lock')) {
                 const waiting2 = () => {
+                    if (!document.querySelector('iframe')) {
+                        setTimeout(waiting2, 500);
+                        return;
+                    }
                     const wrap = document.querySelector('iframe').contentWindow.document.body.querySelector('#entryCanvasWrapper');
                     const but = document.querySelector('iframe').contentWindow.document.body.querySelector('#entryCanvasWrapper > div > div');
                     if (but? wrap? !but.classList.contains('entryRemove'): true : true) {
@@ -306,9 +315,11 @@ const waitAll = () => {
                         return;
                     }
                     let saveLock = 0;
+                    let x = 0;
+                    let y = 0;
                     const mouseLock = async () => {
                         if (Entry123.canvas_) {
-                            if (Entry123.variableContainer.getVariableByName('+Lock').value_ === 1 && but.classList.contains('entryRemove')) {
+                            if (String(Entry123.variableContainer.getVariableByName('+Lock').value_) === '1' && but.classList.contains('entryRemove')) {
                                 if (saveLock === 0) {
                                     if (document.querySelector('iframe').contentWindow.document.pointerLockElement !== Entry123.canvas_) {
                                         try {
@@ -330,20 +341,18 @@ const waitAll = () => {
                             else {
                                 x = 0;
                                 y = 0;
-                                if (document.querySelector('iframe').contentWindow.document.pointerLockElement === Entry123.canvas_) {
+                                saveLock = 0;
+                                if (document.querySelector('iframe')? document.querySelector('iframe').contentWindow.document.pointerLockElement: null === Entry123.canvas_) {
                                     document.querySelector('iframe').contentWindow.document.exitPointerLock();
-                                    saveLock = 0;
                                 }
                             }
                         }
                         setTimeout(mouseLock, 16);
                         // requestAnimationFrame(mouseLock);
                     }
-                    mouseLock();
-                    let x = 0;
-                    let y = 0;
+                    setTimeout(mouseLock, 1);
                     const lockMouse = async () => {
-                        if (Entry123.variableContainer.getVariableByName('+Lock').value_ === 1) {
+                        if (String(Entry123.variableContainer.getVariableByName('+Lock').value_) === '1') {
                             try {
                                 await Entry123.canvas_.requestPointerLock({
                                     unadjustedMovement: true,
@@ -358,7 +367,7 @@ const waitAll = () => {
                     }
                     Entry123.canvas_.addEventListener("click", lockMouse);
                     Entry123.canvas_.addEventListener("mousemove", (e) => {
-                        if (Entry123.variableContainer.getVariableByName('+Lock').value_ === 1) {
+                        if (String(Entry123.variableContainer.getVariableByName('+Lock').value_) === '1') {
                             x += e.movementX;
                             y += -e.movementY;
                             // console.log(e.movementX / Entry123.canvas_.clientWidth * 480, -e.movementY / Entry123.canvas_.clientHeight * 270);
