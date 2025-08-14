@@ -46,7 +46,7 @@ async function changeContent(){
         if (v.innerHTML.startsWith('https://playentry.org/project/')) {
             let a = v.innerHTML.slice(30);
             const csrf = document.querySelector("meta[name=csrf-token]").content;
-            const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.initialState.common.user.xToken;
+            const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.pageProps.initialState.common.user.xToken;
             let fet = await fetch("https://playentry.org/graphql", {
                 "headers": {
                   "accept": "*/*",
@@ -138,7 +138,7 @@ async function changeContent(){
     //         let res = area.innerHTML.replaceAll('*', '​').replaceAll('__', '​​​').replaceAll('~~', '​​​​');
     //         area.value = res;
     //         area.innerHTML = res;
-    //         const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.initialState.common.user.xToken;
+    //         const xToken = JSON.parse(document.getElementById("__NEXT_DATA__").innerText).props.pageProps.initialState.common.user.xToken;
     //         const csrf = document.querySelector("meta[name=csrf-token]").content;
     //         chrome.runtime.sendMessage({
     //             contentScriptQuery: "post",
